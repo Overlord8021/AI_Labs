@@ -11,7 +11,7 @@ class Actor_Graph:
             for actor in show['cast']:
                 # Get the actor's ID
                 actor_id = actor['person']['id']
-                # If the actor is not already in the graph
+                # If the actor is not already in the graph, add them as a node
                 if actor_id not in self.actors:
                     # Create a new Actor object and add it to the graph
                     self.actors[actor_id] = Actor(actor_id, actor['person']['name'], actor['person']['birthday'])
@@ -27,5 +27,6 @@ class Actor_Graph:
             yield actor
             
     def build_relations(self):
+        # Iterate through each actor in the graph, and compute their relations
         for actor in self:
             actor.compute_relations(self)
